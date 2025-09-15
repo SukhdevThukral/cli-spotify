@@ -19,3 +19,30 @@ def playSong(index):
 def pauseSong():
     pygame.mixer.music.pause()
     print("Paused")
+
+def nextSong():
+    global current_index
+    current_index = (current_index + 1) % len(playlist)
+    playSong(current_index)
+
+def prevSong():
+    global current_index
+    current_index = (current_index - 1) % len(playlist)
+    playSong(current_index)
+
+while True:
+    command = input("Command (play/pause/next/prev/quit): ").lower()
+    if command == "play":
+        playSong(current_index)
+    elif command == "pause":
+        pauseSong()
+    elif command == "next":
+        nextSong()
+    elif command == "prev":
+        prevSong()
+    elif command == "quit":
+        pygame.mixer.music.stop()
+        break
+    else:
+        print("Unknown command :(")
+        
